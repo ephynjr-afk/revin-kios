@@ -1,0 +1,237 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#176b45">
+<meta name="description" content="REVIN KIOS, toko sembako dan perlengkapan rumah tangga di Desa Gara.">
+<title>REVIN KIOS | Toko Serba Ada</title>
+<style>
+:root{--hijau:#176b45;--terang:#eaf5ed;--teks:#202b23;--abu:#66736a}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f6f8f5;color:var(--teks)}
+header{background:var(--hijau);color:white;padding:15px;position:sticky;top:0;z-index:5}
+.wrap{max-width:1100px;margin:auto}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.logo{font-size:22px;font-weight:bold}
+.sub{font-size:12px;margin-top:5px;color:#dcefe3}
+button,input,select{font:inherit}
+button{cursor:pointer}
+.cartbtn{background:white;color:var(--hijau);border:0;border-radius:10px;padding:11px;font-weight:bold}
+main{max-width:1100px;margin:auto;padding:15px 12px 95px}
+.hero{padding:25px 20px;border-radius:20px;background:linear-gradient(120deg,#dff2e4,#fff1d3)}
+.hero h1{font-size:clamp(27px,6vw,43px);margin:12px 0;color:#155537}
+.hero p{line-height:1.6;color:#4c6052}
+.tag{display:inline-block;background:#ffdc8b;padding:7px 11px;border-radius:30px;font-size:12px;font-weight:bold}
+.search{width:100%;padding:14px;border:1px solid #d9e2d9;border-radius:12px;margin:17px 0;background:white}
+h2{font-size:21px;margin:22px 0 12px}
+.cats{display:flex;gap:8px;overflow-x:auto;padding:2px 0 9px}
+.cat{border:1px solid #d8e2d8;background:white;border-radius:25px;padding:10px 14px;white-space:nowrap}
+.cat.active{background:var(--hijau);color:white}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+.item{background:white;border:1px solid #e4e9e3;border-radius:15px;padding:12px;min-width:0;display:flex;flex-direction:column}
+.pic{background:var(--terang);border-radius:12px;min-height:75px;display:grid;place-items:center;font-size:40px}
+.item h3{font-size:15px;margin:11px 0 5px}
+.item p{font-size:12px;color:var(--abu);margin:0 0 10px;line-height:1.5}
+.price{color:var(--hijau);font-weight:bold;margin-top:auto;margin-bottom:10px}
+.add,.order{background:var(--hijau);color:white;border:0;border-radius:10px;padding:11px;font-weight:bold;width:100%}
+.info{background:white;border-radius:14px;padding:16px;margin-top:22px;line-height:1.7;font-size:14px}
+.bottom{position:fixed;bottom:0;left:0;right:0;background:white;border-top:1px solid #ddd;padding:10px 13px;z-index:6}
+.bottom button{max-width:1070px;display:block;margin:auto}
+.overlay{display:none;position:fixed;inset:0;background:#0008;z-index:10;align-items:flex-end;justify-content:center}
+.overlay.show{display:flex}
+.panel{background:white;width:100%;max-width:550px;max-height:90vh;overflow:auto;border-radius:20px 20px 0 0;padding:18px}
+.paneltop{display:flex;justify-content:space-between;align-items:center}
+.close{border:0;border-radius:50%;padding:8px 12px;background:#eee;font-size:20px}
+.line{display:flex;justify-content:space-between;gap:8px;padding:13px 0;border-bottom:1px solid #eee}
+.qty{display:flex;align-items:center;gap:9px}
+.qty button{border:0;background:var(--terang);border-radius:7px;padding:7px 10px}
+.field{width:100%;padding:12px;border:1px solid #d7dfd7;border-radius:10px;margin:7px 0 12px}
+.total{display:flex;justify-content:space-between;font-weight:bold;font-size:18px;padding:17px 0}
+.empty{text-align:center;padding:22px;color:var(--abu)}
+footer{text-align:center;color:var(--abu);font-size:12px;padding:20px}
+@media(min-width:650px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}.hero{padding:35px}.overlay{align-items:center}}
+@media(min-width:900px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+</style>
+</head>
+<body>
+
+<header>
+ <div class="wrap nav">
+  <div>
+   <div class="logo">🛒 REVIN KIOS</div>
+   <div class="sub">Sembako • Perlengkapan Rumah Tangga</div>
+  </div>
+  <button class="cartbtn" onclick="openCart()">🧺 <span id="count">0</span></button>
+ </div>
+</header>
+
+<main>
+ <section class="hero">
+  <span class="tag">SELAMAT DATANG DI REVIN KIOS</span>
+  <h1>Belanja mudah, kebutuhan lengkap!</h1>
+  <p>Berbagai kebutuhan sehari-hari, sembako, perlengkapan dapur hingga kebutuhan rumah tangga. Pilih barang dan pesan langsung melalui WhatsApp.</p>
+  <button class="add" style="max-width:190px" onclick="document.getElementById('catalog').scrollIntoView({behavior:'smooth'})">Lihat Semua Barang ↓</button>
+ </section>
+
+ <input id="search" class="search" placeholder="🔎 Cari beras, telur, sabun..." oninput="render()" aria-label="Cari barang">
+
+ <h2>Kategori Barang</h2>
+ <div class="cats" id="categories"></div>
+
+ <h2 id="catalog">Daftar Barang</h2>
+ <p style="font-size:13px;color:#66736a">Pilih barang untuk menambahkannya ke keranjang.</p>
+ <div class="grid" id="products"></div>
+
+ <section class="info">
+  <h3>📍 Informasi Toko</h3>
+  <b>Nama:</b> REVIN KIOS<br>
+  <b>Alamat:</b> Desa Gara<br>
+  <b>WhatsApp:</b> 0813-3745-9052
+  <p>Stok, harga akhir, dan pengantaran dikonfirmasi oleh penjual melalui WhatsApp.</p>
+ </section>
+</main>
+
+<footer>© <span id="year"></span> REVIN KIOS. Terima kasih telah berbelanja!</footer>
+
+<div class="bottom">
+ <button class="order" onclick="openCart()">🛒 Keranjang & Pesan via WhatsApp</button>
+</div>
+
+<div class="overlay" id="overlay" onclick="if(event.target===this)closeCart()">
+ <section class="panel">
+  <div class="paneltop">
+   <h2 style="margin:0">Keranjang Belanja</h2>
+   <button class="close" onclick="closeCart()">×</button>
+  </div>
+  <div id="cartItems"></div>
+  <div class="total"><span>Total sementara</span><span id="total">Rp0</span></div>
+  <label for="customer">Nama pemesan</label>
+  <input class="field" id="customer" placeholder="Masukkan nama Anda">
+  <label for="address">Alamat pengantaran / catatan</label>
+  <textarea class="field" id="address" rows="3" placeholder="Desa, patokan rumah, atau catatan"></textarea>
+  <button class="order" onclick="checkout()">Kirim Pesanan ke WhatsApp</button>
+  <p style="font-size:12px;color:#66736a">Pesanan akan dibuka di WhatsApp untuk diperiksa sebelum dikirim.</p>
+ </section>
+</div>
+
+<script>
+// Nomor WhatsApp REVIN KIOS: kode negara 62, tanpa angka 0 di depan.
+const WA = "6281337459052";
+
+// Harga berikut adalah CONTOH. Ubah sesuai harga toko.
+const barang = [
+ {id:1,n:"Beras",c:"Sembako",e:"🍚",p:15000,u:"kg"},
+ {id:2,n:"Minyak Goreng",c:"Sembako",e:"🫗",p:18000,u:"liter"},
+ {id:3,n:"Gula Pasir",c:"Sembako",e:"🧂",p:17000,u:"kg"},
+ {id:4,n:"Telur Ayam",c:"Sembako",e:"🥚",p:30000,u:"kg"},
+ {id:5,n:"Tepung Terigu",c:"Sembako",e:"🌾",p:12000,u:"kg"},
+ {id:6,n:"Garam",c:"Bumbu Dapur",e:"🧂",p:3000,u:"bungkus"},
+ {id:7,n:"Kecap",c:"Bumbu Dapur",e:"🍶",p:8000,u:"botol"},
+ {id:8,n:"Saus Sambal",c:"Bumbu Dapur",e:"🌶️",p:9000,u:"botol"},
+ {id:9,n:"Mi Instan",c:"Makanan",e:"🍜",p:3500,u:"bungkus"},
+ {id:10,n:"Biskuit",c:"Makanan",e:"🍪",p:7000,u:"bungkus"},
+ {id:11,n:"Susu",c:"Minuman",e:"🥛",p:8000,u:"kotak"},
+ {id:12,n:"Air Mineral",c:"Minuman",e:"💧",p:4000,u:"botol"},
+ {id:13,n:"Kopi Sachet",c:"Minuman",e:"☕",p:2000,u:"sachet"},
+ {id:14,n:"Teh",c:"Minuman",e:"🍵",p:6000,u:"kotak"},
+ {id:15,n:"Sabun Mandi",c:"Perlengkapan Mandi",e:"🧼",p:4000,u:"batang"},
+ {id:16,n:"Sampo",c:"Perlengkapan Mandi",e:"🧴",p:12000,u:"botol"},
+ {id:17,n:"Pasta Gigi",c:"Perlengkapan Mandi",e:"🪥",p:9000,u:"buah"},
+ {id:18,n:"Deterjen",c:"Kebersihan",e:"🫧",p:12000,u:"bungkus"},
+ {id:19,n:"Sabun Cuci Piring",c:"Kebersihan",e:"🧽",p:7000,u:"botol"},
+ {id:20,n:"Pembersih Lantai",c:"Kebersihan",e:"🧹",p:15000,u:"botol"},
+ {id:21,n:"Sapu",c:"Peralatan Rumah",e:"🧹",p:18000,u:"buah"},
+ {id:22,n:"Ember",c:"Peralatan Rumah",e:"🪣",p:20000,u:"buah"},
+ {id:23,n:"Baskom",c:"Peralatan Rumah",e:"🥣",p:15000,u:"buah"},
+ {id:24,n:"Panci",c:"Peralatan Rumah",e:"🍲",p:45000,u:"buah"},
+ {id:25,n:"Wajan",c:"Peralatan Rumah",e:"🍳",p:40000,u:"buah"},
+ {id:26,n:"Piring",c:"Peralatan Rumah",e:"🍽️",p:8000,u:"buah"},
+ {id:27,n:"Gelas",c:"Peralatan Rumah",e:"🥛",p:5000,u:"buah"},
+ {id:28,n:"Kantong Sampah",c:"Kebersihan",e:"🗑️",p:8000,u:"pak"},
+ {id:29,n:"Galon Air",c:"Barang Besar",e:"🚰",p:25000,u:"buah"},
+ {id:30,n:"Karung Beras 5 kg",c:"Barang Besar",e:"🛍️",p:75000,u:"karung"},
+ {id:31,n:"Tabung Gas LPG",c:"Barang Besar",e:"🔥",p:22000,u:"tabung"},
+ {id:32,n:"Kardus Penyimpanan",c:"Barang Besar",e:"📦",p:15000,u:"buah"}
+];
+
+let kategori="Semua";
+let keranjang={};
+const rupiah=n=>"Rp"+n.toLocaleString("id-ID");
+
+function renderKategori(){
+ const daftar=["Semua",...new Set(barang.map(x=>x.c))];
+ document.getElementById("categories").innerHTML=daftar.map(c=>
+ `<button class="cat ${c===kategori?"active":""}" onclick="pilihKategori('${c}')">${c}</button>`
+ ).join("");
+}
+function pilihKategori(c){kategori=c;renderKategori();render();}
+function render(){
+ const q=document.getElementById("search").value.toLowerCase();
+ const list=barang.filter(x=>
+ (kategori==="Semua"||x.c===kategori)&&
+ (x.n+" "+x.c).toLowerCase().includes(q)
+ );
+ document.getElementById("products").innerHTML=list.length?list.map(x=>
+ `<article class="item">
+ <div class="pic">${x.e}</div>
+ <h3>${x.n}</h3>
+ <p>Kategori: ${x.c}</p>
+ <div class="price">${rupiah(x.p)} / ${x.u}</div>
+ <button class="add" onclick="tambah(${x.id})">＋ Tambah</button>
+ </article>`
+ ).join(""):"<p>Barang tidak ditemukan.</p>";
+}
+function tambah(id){keranjang[id]=(keranjang[id]||0)+1;updateCount();}
+function updateCount(){
+ document.getElementById("count").textContent=
+ Object.values(keranjang).reduce((a,b)=>a+b,0);
+}
+function openCart(){renderCart();document.getElementById("overlay").classList.add("show");}
+function closeCart(){document.getElementById("overlay").classList.remove("show");}
+function ubah(id,angka){
+ keranjang[id]=(keranjang[id]||0)+angka;
+ if(keranjang[id]<=0)delete keranjang[id];
+ updateCount();renderCart();
+}
+function renderCart(){
+ const entries=Object.entries(keranjang);
+ const box=document.getElementById("cartItems");
+ if(!entries.length){
+  box.innerHTML='<div class="empty">Keranjang masih kosong.<br>Silakan pilih barang terlebih dahulu.</div>';
+ }else{
+  box.innerHTML=entries.map(([id,jumlah])=>{
+   const x=barang.find(b=>b.id===Number(id));
+   return `<div class="line"><div><b>${x.n}</b><br><small>${rupiah(x.p)} / ${x.u}</small></div>
+   <div class="qty"><button onclick="ubah(${x.id},-1)">−</button><b>${jumlah}</b><button onclick="ubah(${x.id},1)">+</button></div></div>`;
+  }).join("");
+ }
+ const total=entries.reduce((s,[id,j])=>s+barang.find(x=>x.id===Number(id)).p*j,0);
+ document.getElementById("total").textContent=rupiah(total);
+}
+function checkout(){
+ const entries=Object.entries(keranjang);
+ if(!entries.length){alert("Keranjang masih kosong.");return;}
+ const nama=document.getElementById("customer").value.trim()||"Pelanggan";
+ const alamat=document.getElementById("address").value.trim()||"Belum diisi";
+ const daftar=entries.map(([id,j])=>{
+  const x=barang.find(b=>b.id===Number(id));
+  return `- ${x.n} x ${j} = ${rupiah(x.p*j)}`;
+ });
+ const total=entries.reduce((s,[id,j])=>s+barang.find(x=>x.id===Number(id)).p*j,0);
+ const pesan=
+ `Halo REVIN KIOS, saya ingin memesan:%0A%0A`+
+ encodeURIComponent(daftar.join("\n"))+
+ `%0A%0ATotal sementara: ${encodeURIComponent(rupiah(total))}`+
+ `%0ANama: ${encodeURIComponent(nama)}`+
+ `%0AAlamat/catatan: ${encodeURIComponent(alamat)}`+
+ `%0A%0AMohon konfirmasi stok, harga, dan biaya pengantaran. Terima kasih.`;
+ window.open(`https://wa.me/${WA}?text=${pesan}`,"_blank");
+}
+document.getElementById("year").textContent=new Date().getFullYear();
+renderKategori();
+render();
+</script>
+</body>
+</html>
