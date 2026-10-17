@@ -1,2 +1,1 @@
-# Revinkios
-Toko sembako
+Koprasi 
