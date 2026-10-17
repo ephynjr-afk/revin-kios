@@ -4,234 +4,463 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#176b45">
-<meta name="description" content="REVIN KIOS, toko sembako dan perlengkapan rumah tangga di Desa Gara.">
-<title>REVIN KIOS | Toko Serba Ada</title>
+<meta name="theme-color" content="#b91c1c">
+<title>Koperasi Desa Merah Putih</title>
 <style>
-:root{--hijau:#176b45;--terang:#eaf5ed;--teks:#202b23;--abu:#66736a}
+:root {
+  --red:#b91c1c; --dark:#7f1d1d; --green:#166534;
+  --bg:#f5f7f5; --white:#fff; --text:#18221b;
+  --muted:#68736b; --border:#e1e7e2;
+}
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f6f8f5;color:var(--teks)}
-header{background:var(--hijau);color:white;padding:15px;position:sticky;top:0;z-index:5}
-.wrap{max-width:1100px;margin:auto}
-.nav{display:flex;align-items:center;justify-content:space-between;gap:10px}
-.logo{font-size:22px;font-weight:bold}
-.sub{font-size:12px;margin-top:5px;color:#dcefe3}
-button,input,select{font:inherit}
-button{cursor:pointer}
-.cartbtn{background:white;color:var(--hijau);border:0;border-radius:10px;padding:11px;font-weight:bold}
-main{max-width:1100px;margin:auto;padding:15px 12px 95px}
-.hero{padding:25px 20px;border-radius:20px;background:linear-gradient(120deg,#dff2e4,#fff1d3)}
-.hero h1{font-size:clamp(27px,6vw,43px);margin:12px 0;color:#155537}
-.hero p{line-height:1.6;color:#4c6052}
-.tag{display:inline-block;background:#ffdc8b;padding:7px 11px;border-radius:30px;font-size:12px;font-weight:bold}
-.search{width:100%;padding:14px;border:1px solid #d9e2d9;border-radius:12px;margin:17px 0;background:white}
-h2{font-size:21px;margin:22px 0 12px}
-.cats{display:flex;gap:8px;overflow-x:auto;padding:2px 0 9px}
-.cat{border:1px solid #d8e2d8;background:white;border-radius:25px;padding:10px 14px;white-space:nowrap}
-.cat.active{background:var(--hijau);color:white}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
-.item{background:white;border:1px solid #e4e9e3;border-radius:15px;padding:12px;min-width:0;display:flex;flex-direction:column}
-.pic{background:var(--terang);border-radius:12px;min-height:75px;display:grid;place-items:center;font-size:40px}
-.item h3{font-size:15px;margin:11px 0 5px}
-.item p{font-size:12px;color:var(--abu);margin:0 0 10px;line-height:1.5}
-.price{color:var(--hijau);font-weight:bold;margin-top:auto;margin-bottom:10px}
-.add,.order{background:var(--hijau);color:white;border:0;border-radius:10px;padding:11px;font-weight:bold;width:100%}
-.info{background:white;border-radius:14px;padding:16px;margin-top:22px;line-height:1.7;font-size:14px}
-.bottom{position:fixed;bottom:0;left:0;right:0;background:white;border-top:1px solid #ddd;padding:10px 13px;z-index:6}
-.bottom button{max-width:1070px;display:block;margin:auto}
-.overlay{display:none;position:fixed;inset:0;background:#0008;z-index:10;align-items:flex-end;justify-content:center}
-.overlay.show{display:flex}
-.panel{background:white;width:100%;max-width:550px;max-height:90vh;overflow:auto;border-radius:20px 20px 0 0;padding:18px}
-.paneltop{display:flex;justify-content:space-between;align-items:center}
-.close{border:0;border-radius:50%;padding:8px 12px;background:#eee;font-size:20px}
-.line{display:flex;justify-content:space-between;gap:8px;padding:13px 0;border-bottom:1px solid #eee}
-.qty{display:flex;align-items:center;gap:9px}
-.qty button{border:0;background:var(--terang);border-radius:7px;padding:7px 10px}
-.field{width:100%;padding:12px;border:1px solid #d7dfd7;border-radius:10px;margin:7px 0 12px}
-.total{display:flex;justify-content:space-between;font-weight:bold;font-size:18px;padding:17px 0}
-.empty{text-align:center;padding:22px;color:var(--abu)}
-footer{text-align:center;color:var(--abu);font-size:12px;padding:20px}
-@media(min-width:650px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}.hero{padding:35px}.overlay{align-items:center}}
-@media(min-width:900px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+body{margin:0;background:var(--bg);color:var(--text);
+  font-family:system-ui,-apple-system,Arial,sans-serif}
+header{background:linear-gradient(120deg,var(--dark),var(--red));
+  color:white;padding:20px 16px;border-radius:0 0 22px 22px}
+.brand{max-width:1000px;margin:auto;display:flex;align-items:center;gap:12px}
+.logo{background:white;color:var(--red);border-radius:14px;
+  padding:10px;font-size:26px}
+h1{font-size:20px;margin:0}
+header p{font-size:12px;margin:5px 0 0;opacity:.9}
+.wrap{max-width:1000px;margin:auto;padding:14px}
+.panel{background:white;border:1px solid var(--border);
+  border-radius:16px;padding:16px;margin-bottom:13px}
+h2{font-size:18px;margin:0 0 12px}
+h3{font-size:15px;margin:18px 0 8px}
+small,.muted{color:var(--muted)}
+label{display:block;font-size:13px;font-weight:650;margin:10px 0 5px}
+input,select,textarea{width:100%;padding:12px;border:1px solid #cbd5ce;
+  border-radius:10px;background:white;font:inherit;font-size:14px}
+button{border:0;border-radius:10px;padding:11px 14px;
+  background:var(--red);color:white;font-weight:700;cursor:pointer}
+button:disabled{opacity:.5}
+button.secondary{background:#e8f4eb;color:var(--green)}
+button.danger{background:#fee2e2;color:#991b1b}
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.stat{background:white;border:1px solid var(--border);border-radius:14px;padding:13px}
+.stat span{display:block;color:var(--muted);font-size:12px}
+.stat strong{display:block;font-size:19px;margin-top:6px;overflow-wrap:anywhere}
+nav{display:flex;gap:7px;overflow-x:auto;padding:12px 0}
+nav button{white-space:nowrap;background:white;color:#374151;
+  border:1px solid var(--border)}
+nav button.active{background:var(--red);color:white}
+.grid{display:grid;grid-template-columns:1fr;gap:10px}
+.tablewrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:13px;min-width:460px}
+th,td{text-align:left;padding:10px;border-bottom:1px solid var(--border)}
+th{background:#f8faf8;color:#566158}
+.hidden{display:none!important}
+.notice{background:#fff7df;border:1px solid #f1d58d;
+  border-radius:12px;padding:12px;font-size:12px;line-height:1.6}
+.status{font-size:13px;margin-top:10px;color:var(--muted)}
+.empty{padding:15px;text-align:center;color:var(--muted)}
+@media(min-width:650px){
+ .stats{grid-template-columns:repeat(4,1fr)}
+ .grid{grid-template-columns:1fr 1fr}
+ .full{grid-column:1/-1}
+}
 </style>
 </head>
 <body>
-
 <header>
- <div class="wrap nav">
-  <div>
-   <div class="logo">🛒 REVIN KIOS</div>
-   <div class="sub">Sembako • Perlengkapan Rumah Tangga</div>
+  <div class="brand">
+    <div class="logo">🇮🇩</div>
+    <div>
+      <h1>Koperasi Desa Merah Putih</h1>
+      <p>Bersama membangun ekonomi desa</p>
+    </div>
   </div>
-  <button class="cartbtn" onclick="openCart()">🧺 <span id="count">0</span></button>
- </div>
 </header>
 
-<main>
- <section class="hero">
-  <span class="tag">SELAMAT DATANG DI REVIN KIOS</span>
-  <h1>Belanja mudah, kebutuhan lengkap!</h1>
-  <p>Berbagai kebutuhan sehari-hari, sembako, perlengkapan dapur hingga kebutuhan rumah tangga. Pilih barang dan pesan langsung melalui WhatsApp.</p>
-  <button class="add" style="max-width:190px" onclick="document.getElementById('catalog').scrollIntoView({behavior:'smooth'})">Lihat Semua Barang ↓</button>
- </section>
+<main class="wrap">
+  <section id="loginPanel" class="panel">
+    <h2>Login Pengurus</h2>
+    <p class="muted">Masuk dengan akun yang telah dibuat oleh administrator Firebase.</p>
+    <form id="loginForm">
+      <label>Email pengurus</label>
+      <input id="email" type="email" autocomplete="username" required>
+      <label>Kata sandi</label>
+      <input id="password" type="password" autocomplete="current-password" required>
+      <div class="actions">
+        <button type="submit">Masuk</button>
+      </div>
+    </form>
+    <div id="loginMessage" class="status"></div>
+  </section>
 
- <input id="search" class="search" placeholder="🔎 Cari beras, telur, sabun..." oninput="render()" aria-label="Cari barang">
+  <section id="app" class="hidden">
+    <div class="panel">
+      <div style="display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap">
+        <div><strong>Dashboard Pengurus</strong><div id="userLabel" class="muted"></div></div>
+        <button id="logoutBtn" class="secondary">Keluar</button>
+      </div>
+    </div>
 
- <h2>Kategori Barang</h2>
- <div class="cats" id="categories"></div>
+    <section class="stats">
+      <div class="stat"><span>Anggota</span><strong id="memberCount">0</strong></div>
+      <div class="stat"><span>Stok barang (jenis)</span><strong id="itemCount">0</strong></div>
+      <div class="stat"><span>Total pemasukan</span><strong id="income">Rp0</strong></div>
+      <div class="stat"><span>Total pengeluaran</span><strong id="expense">Rp0</strong></div>
+    </section>
 
- <h2 id="catalog">Daftar Barang</h2>
- <p style="font-size:13px;color:#66736a">Pilih barang untuk menambahkannya ke keranjang.</p>
- <div class="grid" id="products"></div>
+    <nav>
+      <button class="active" data-page="home">Ringkasan</button>
+      <button data-page="members">Anggota</button>
+      <button data-page="money">Simpan Pinjam</button>
+      <button data-page="stock">Stok Barang</button>
+      <button data-page="reports">Laporan</button>
+    </nav>
 
- <section class="info">
-  <h3>📍 Informasi Toko</h3>
-  <b>Nama:</b> REVIN KIOS<br>
-  <b>Alamat:</b> Desa Gara<br>
-  <b>WhatsApp:</b> 0813-3745-9052
-  <p>Stok, harga akhir, dan pengantaran dikonfirmasi oleh penjual melalui WhatsApp.</p>
- </section>
+    <section id="page-home" class="page">
+      <div class="panel">
+        <h2>Ringkasan koperasi</h2>
+        <p class="muted">Data diambil dari database online setelah pengurus login.</p>
+        <div id="summary"></div>
+      </div>
+      <div class="notice">
+        Gunakan akun pengurus resmi. Setiap pencatatan uang dan stok harus
+        diperiksa dengan bukti transaksi. Saldo di sini merupakan ringkasan
+        catatan, bukan pengganti pembukuan dan laporan resmi koperasi.
+      </div>
+    </section>
+
+    <section id="page-members" class="page hidden">
+      <div class="panel">
+        <h2>Tambah anggota</h2>
+        <form id="memberForm" class="grid">
+          <div><label>Nama lengkap</label><input name="name" required maxlength="100"></div>
+          <div><label>Nomor anggota</label><input name="number" required maxlength="30" placeholder="KMP-001"></div>
+          <div><label>Nomor HP (opsional)</label><input name="phone" inputmode="tel" maxlength="25"></div>
+          <div><label>Tanggal bergabung</label><input name="date" type="date" required></div>
+          <div class="full"><button type="submit">Simpan anggota</button></div>
+        </form>
+      </div>
+      <div class="panel"><h2>Daftar anggota</h2><div id="membersTable"></div></div>
+    </section>
+
+    <section id="page-money" class="page hidden">
+      <div class="panel">
+        <h2>Catat simpanan, pinjaman, dan keuangan</h2>
+        <form id="moneyForm" class="grid">
+          <div>
+            <label>Jenis transaksi</label>
+            <select name="type" required>
+              <option value="simpanan">Simpanan anggota</option>
+              <option value="pinjaman">Pencairan pinjaman</option>
+              <option value="angsuran">Pembayaran angsuran</option>
+              <option value="pemasukan">Pemasukan usaha</option>
+              <option value="pengeluaran">Pengeluaran</option>
+            </select>
+          </div>
+          <div><label>Jumlah (rupiah)</label><input name="amount" type="number" min="1" step="1" required></div>
+          <div><label>Anggota terkait (opsional)</label><select name="member" id="memberSelect"><option value="">Tidak terkait anggota</option></select></div>
+          <div><label>Tanggal</label><input name="date" type="date" required></div>
+          <div class="full"><label>Keterangan</label><input name="note" maxlength="160" required placeholder="Contoh: Simpanan wajib bulan Oktober"></div>
+          <div class="full"><button type="submit">Simpan transaksi</button></div>
+        </form>
+        <p class="muted">Catatan pinjaman dan angsuran ini belum menghitung bunga, denda, jadwal, atau sisa kewajiban secara otomatis.</p>
+      </div>
+      <div class="panel"><h2>Riwayat transaksi</h2><div id="moneyTable"></div></div>
+    </section>
+
+    <section id="page-stock" class="page hidden">
+      <div class="panel">
+        <h2>Tambah barang koperasi</h2>
+        <form id="itemForm" class="grid">
+          <div><label>Nama barang</label><input name="name" required maxlength="100"></div>
+          <div><label>Kode barang</label><input name="code" required maxlength="30"></div>
+          <div><label>Stok awal</label><input name="qty" type="number" min="0" step="1" required></div>
+          <div><label>Harga jual per unit (Rp)</label><input name="price" type="number" min="0" step="1" required></div>
+          <div class="full"><button type="submit">Simpan barang</button></div>
+        </form>
+      </div>
+      <div class="panel">
+        <h2>Ubah stok barang</h2>
+        <form id="stockForm" class="grid">
+          <div><label>Barang</label><select id="stockItem" name="item" required></select></div>
+          <div><label>Jenis perubahan</label><select name="direction"><option value="in">Barang masuk</option><option value="out">Barang keluar/terjual</option></select></div>
+          <div><label>Jumlah unit</label><input name="qty" type="number" min="1" step="1" required></div>
+          <div><label>Keterangan</label><input name="note" maxlength="120" required></div>
+          <div class="full"><button type="submit">Perbarui stok</button></div>
+        </form>
+      </div>
+      <div class="panel"><h2>Daftar stok</h2><div id="stockTable"></div></div>
+    </section>
+
+    <section id="page-reports" class="page hidden">
+      <div class="panel">
+        <h2>Laporan dan cadangan</h2>
+        <p class="muted">Unduh salinan data yang sedang tersedia untuk membantu pemeriksaan dan pencadangan.</p>
+        <div class="actions">
+          <button id="exportBtn">Unduh laporan CSV</button>
+          <button id="backupBtn" class="secondary">Unduh cadangan JSON</button>
+        </div>
+        <div id="reportSummary" style="margin-top:15px"></div>
+      </div>
+    </section>
+  </section>
 </main>
 
-<footer>© <span id="year"></span> REVIN KIOS. Terima kasih telah berbelanja!</footer>
+<script type="module">
+import { initializeApp } from
+  "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+import {
+  getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut
+} from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
+import {
+  getFirestore, collection, addDoc, getDocs, deleteDoc, doc,
+  updateDoc, runTransaction, serverTimestamp
+} from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
 
-<div class="bottom">
- <button class="order" onclick="openCart()">🛒 Keranjang & Pesan via WhatsApp</button>
-</div>
+/* GANTI SEMUA NILAI DI BAWAH DENGAN KONFIGURASI PROYEK FIREBASE KAMU */
+constconst firebaseConfig = {
+  apiKey: "ISI_API_KEY",
+  authDomain: "ISI_PROJECT_ID.firebaseapp.com",
+  projectId: "ISI_PROJECT_ID",
+  storageBucket: "ISI_PROJECT_ID.firebasestorage.app",
+  messagingSenderId: "ISI_SENDER_ID",
+  appId: "ISI_APP_ID"
+};= {
+  apiKey: "ISI_API_KEY",
+  authDomain: "ISI_PROJECT_ID.firebaseapp.com",
+  projectId: "ISI_PROJECT_ID",
+  storageBucket: "ISI_PROJECT_ID.firebasestorage.app",
+  messagingSenderId: "ISI_SENDER_ID",
+  appId: "ISI_APP_ID"
+};
 
-<div class="overlay" id="overlay" onclick="if(event.target===this)closeCart()">
- <section class="panel">
-  <div class="paneltop">
-   <h2 style="margin:0">Keranjang Belanja</h2>
-   <button class="close" onclick="closeCart()">×</button>
-  </div>
-  <div id="cartItems"></div>
-  <div class="total"><span>Total sementara</span><span id="total">Rp0</span></div>
-  <label for="customer">Nama pemesan</label>
-  <input class="field" id="customer" placeholder="Masukkan nama Anda">
-  <label for="address">Alamat pengantaran / catatan</label>
-  <textarea class="field" id="address" rows="3" placeholder="Desa, patokan rumah, atau catatan"></textarea>
-  <button class="order" onclick="checkout()">Kirim Pesanan ke WhatsApp</button>
-  <p style="font-size:12px;color:#66736a">Pesanan akan dibuka di WhatsApp untuk diperiksa sebelum dikirim.</p>
- </section>
-</div>
+const loginPanel = document.querySelector("#loginPanel");
+const appPanel = document.querySelector("#app");
+const loginMessage = document.querySelector("#loginMessage");
+const $ = s => document.querySelector(s);
+let auth, db, currentUser;
+let members = [], items = [], transactions = [];
 
-<script>
-// Nomor WhatsApp REVIN KIOS: kode negara 62, tanpa angka 0 di depan.
-const WA = "6281337459052";
+const rupiah = n => new Intl.NumberFormat("id-ID", {
+  style:"currency", currency:"IDR", maximumFractionDigits:0
+}).format(Number(n)||0);
 
-// Harga berikut adalah CONTOH. Ubah sesuai harga toko.
-const barang = [
- {id:1,n:"Beras",c:"Sembako",e:"🍚",p:15000,u:"kg"},
- {id:2,n:"Minyak Goreng",c:"Sembako",e:"🫗",p:18000,u:"liter"},
- {id:3,n:"Gula Pasir",c:"Sembako",e:"🧂",p:17000,u:"kg"},
- {id:4,n:"Telur Ayam",c:"Sembako",e:"🥚",p:30000,u:"kg"},
- {id:5,n:"Tepung Terigu",c:"Sembako",e:"🌾",p:12000,u:"kg"},
- {id:6,n:"Garam",c:"Bumbu Dapur",e:"🧂",p:3000,u:"bungkus"},
- {id:7,n:"Kecap",c:"Bumbu Dapur",e:"🍶",p:8000,u:"botol"},
- {id:8,n:"Saus Sambal",c:"Bumbu Dapur",e:"🌶️",p:9000,u:"botol"},
- {id:9,n:"Mi Instan",c:"Makanan",e:"🍜",p:3500,u:"bungkus"},
- {id:10,n:"Biskuit",c:"Makanan",e:"🍪",p:7000,u:"bungkus"},
- {id:11,n:"Susu",c:"Minuman",e:"🥛",p:8000,u:"kotak"},
- {id:12,n:"Air Mineral",c:"Minuman",e:"💧",p:4000,u:"botol"},
- {id:13,n:"Kopi Sachet",c:"Minuman",e:"☕",p:2000,u:"sachet"},
- {id:14,n:"Teh",c:"Minuman",e:"🍵",p:6000,u:"kotak"},
- {id:15,n:"Sabun Mandi",c:"Perlengkapan Mandi",e:"🧼",p:4000,u:"batang"},
- {id:16,n:"Sampo",c:"Perlengkapan Mandi",e:"🧴",p:12000,u:"botol"},
- {id:17,n:"Pasta Gigi",c:"Perlengkapan Mandi",e:"🪥",p:9000,u:"buah"},
- {id:18,n:"Deterjen",c:"Kebersihan",e:"🫧",p:12000,u:"bungkus"},
- {id:19,n:"Sabun Cuci Piring",c:"Kebersihan",e:"🧽",p:7000,u:"botol"},
- {id:20,n:"Pembersih Lantai",c:"Kebersihan",e:"🧹",p:15000,u:"botol"},
- {id:21,n:"Sapu",c:"Peralatan Rumah",e:"🧹",p:18000,u:"buah"},
- {id:22,n:"Ember",c:"Peralatan Rumah",e:"🪣",p:20000,u:"buah"},
- {id:23,n:"Baskom",c:"Peralatan Rumah",e:"🥣",p:15000,u:"buah"},
- {id:24,n:"Panci",c:"Peralatan Rumah",e:"🍲",p:45000,u:"buah"},
- {id:25,n:"Wajan",c:"Peralatan Rumah",e:"🍳",p:40000,u:"buah"},
- {id:26,n:"Piring",c:"Peralatan Rumah",e:"🍽️",p:8000,u:"buah"},
- {id:27,n:"Gelas",c:"Peralatan Rumah",e:"🥛",p:5000,u:"buah"},
- {id:28,n:"Kantong Sampah",c:"Kebersihan",e:"🗑️",p:8000,u:"pak"},
- {id:29,n:"Galon Air",c:"Barang Besar",e:"🚰",p:25000,u:"buah"},
- {id:30,n:"Karung Beras 5 kg",c:"Barang Besar",e:"🛍️",p:75000,u:"karung"},
- {id:31,n:"Tabung Gas LPG",c:"Barang Besar",e:"🔥",p:22000,u:"tabung"},
- {id:32,n:"Kardus Penyimpanan",c:"Barang Besar",e:"📦",p:15000,u:"buah"}
-];
+const esc = value => String(value ?? "").replace(/[&<>"']/g, c => ({
+  "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;"
+}[c]));
 
-let kategori="Semua";
-let keranjang={};
-const rupiah=n=>"Rp"+n.toLocaleString("id-ID");
+const today = () => new Date().toLocaleDateString("en-CA");
 
-function renderKategori(){
- const daftar=["Semua",...new Set(barang.map(x=>x.c))];
- document.getElementById("categories").innerHTML=daftar.map(c=>
- `<button class="cat ${c===kategori?"active":""}" onclick="pilihKategori('${c}')">${c}</button>`
- ).join("");
+function message(text, error=false) {
+  loginMessage.textContent = text;
+  loginMessage.style.color = error ? "#b91c1c" : "#166534";
 }
-function pilihKategori(c){kategori=c;renderKategori();render();}
-function render(){
- const q=document.getElementById("search").value.toLowerCase();
- const list=barang.filter(x=>
- (kategori==="Semua"||x.c===kategori)&&
- (x.n+" "+x.c).toLowerCase().includes(q)
- );
- document.getElementById("products").innerHTML=list.length?list.map(x=>
- `<article class="item">
- <div class="pic">${x.e}</div>
- <h3>${x.n}</h3>
- <p>Kategori: ${x.c}</p>
- <div class="price">${rupiah(x.p)} / ${x.u}</div>
- <button class="add" onclick="tambah(${x.id})">＋ Tambah</button>
- </article>`
- ).join(""):"<p>Barang tidak ditemukan.</p>";
+
+function showPage(page) {
+  document.querySelectorAll(".page").forEach(el => el.classList.add("hidden"));
+  $("#page-"+page).classList.remove("hidden");
+  document.querySelectorAll("nav button").forEach(btn =>
+    btn.classList.toggle("active", btn.dataset.page === page));
 }
-function tambah(id){keranjang[id]=(keranjang[id]||0)+1;updateCount();}
-function updateCount(){
- document.getElementById("count").textContent=
- Object.values(keranjang).reduce((a,b)=>a+b,0);
+document.querySelectorAll("nav button").forEach(btn =>
+  btn.addEventListener("click", () => showPage(btn.dataset.page)));
+
+try {
+  if (firebaseConfig.apiKey === "ISI_API_KEY" ||
+      firebaseConfig.projectId === "ISI_PROJECT_ID") {
+    message("Konfigurasi Firebase belum diisi. Ikuti panduan pemasangan di bawah.", true);
+  } else {
+    const firebaseApp = initializeApp(firebaseConfig);
+    auth = getAuth(firebaseApp);
+    db = getFirestore(firebaseApp);
+
+    $("#loginForm").addEventListener("submit", async e => {
+      e.preventDefault();
+      message("Sedang masuk...");
+      try {
+        await signInWithEmailAndPassword(auth, $("#email").value.trim(),
+          $("#password").value);
+      } catch (err) {
+        message("Login gagal. Periksa email, kata sandi, dan pengaturan Firebase.", true);
+      }
+    });
+
+    $("#logoutBtn").addEventListener("click", () => signOut(auth));
+
+    onAuthStateChanged(auth, async user => {
+      currentUser = user;
+      loginPanel.classList.toggle("hidden", !!user);
+      appPanel.classList.toggle("hidden", !user);
+      if (user) {
+        $("#userLabel").textContent = user.email || "Pengurus";
+        await loadData();
+      }
+    });
+  }
+} catch (err) {
+  message("Firebase belum siap. Periksa konfigurasi dan koneksi internet.", true);
 }
-function openCart(){renderCart();document.getElementById("overlay").classList.add("show");}
-function closeCart(){document.getElementById("overlay").classList.remove("show");}
-function ubah(id,angka){
- keranjang[id]=(keranjang[id]||0)+angka;
- if(keranjang[id]<=0)delete keranjang[id];
- updateCount();renderCart();
+
+async function loadData() {
+  try {
+    const [m, i, t] = await Promise.all([
+      getDocs(collection(db, "members")),
+      getDocs(collection(db, "items")),
+      getDocs(collection(db, "transactions"))
+    ]);
+    members = m.docs.map(d => ({id:d.id,...d.data()}));
+    items = i.docs.map(d => ({id:d.id,...d.data()}));
+    transactions = t.docs.map(d => ({id:d.id,...d.data()}));
+    renderAll();
+  } catch (err) {
+    alert("Data gagal dimuat. Periksa koneksi dan Firestore Security Rules.");
+  }
 }
-function renderCart(){
- const entries=Object.entries(keranjang);
- const box=document.getElementById("cartItems");
- if(!entries.length){
-  box.innerHTML='<div class="empty">Keranjang masih kosong.<br>Silakan pilih barang terlebih dahulu.</div>';
- }else{
-  box.innerHTML=entries.map(([id,jumlah])=>{
-   const x=barang.find(b=>b.id===Number(id));
-   return `<div class="line"><div><b>${x.n}</b><br><small>${rupiah(x.p)} / ${x.u}</small></div>
-   <div class="qty"><button onclick="ubah(${x.id},-1)">−</button><b>${jumlah}</b><button onclick="ubah(${x.id},1)">+</button></div></div>`;
-  }).join("");
- }
- const total=entries.reduce((s,[id,j])=>s+barang.find(x=>x.id===Number(id)).p*j,0);
- document.getElementById("total").textContent=rupiah(total);
+
+async function addRecord(path, data) {
+  if (!currentUser) throw new Error("Silakan login terlebih dahulu.");
+  await addDoc(collection(db, path), {
+    ...data, createdBy:currentUser.uid, createdAt:serverTimestamp()
+  });
+  await loadData();
 }
-function checkout(){
- const entries=Object.entries(keranjang);
- if(!entries.length){alert("Keranjang masih kosong.");return;}
- const nama=document.getElementById("customer").value.trim()||"Pelanggan";
- const alamat=document.getElementById("address").value.trim()||"Belum diisi";
- const daftar=entries.map(([id,j])=>{
-  const x=barang.find(b=>b.id===Number(id));
-  return `- ${x.n} x ${j} = ${rupiah(x.p*j)}`;
- });
- const total=entries.reduce((s,[id,j])=>s+barang.find(x=>x.id===Number(id)).p*j,0);
- const pesan=
- `Halo REVIN KIOS, saya ingin memesan:%0A%0A`+
- encodeURIComponent(daftar.join("\n"))+
- `%0A%0ATotal sementara: ${encodeURIComponent(rupiah(total))}`+
- `%0ANama: ${encodeURIComponent(nama)}`+
- `%0AAlamat/catatan: ${encodeURIComponent(alamat)}`+
- `%0A%0AMohon konfirmasi stok, harga, dan biaya pengantaran. Terima kasih.`;
- window.open(`https://wa.me/${WA}?text=${pesan}`,"_blank");
+
+function renderAll() {
+  $("#memberCount").textContent = members.length;
+  $("#itemCount").textContent = items.length;
+  const sum = type => transactions.filter(t => t.type === type)
+    .reduce((n,t) => n + Number(t.amount || 0), 0);
+  $("#income").textContent = rupiah(sum("simpanan")+sum("angsuran")+sum("pemasukan"));
+  $("#expense").textContent = rupiah(sum("pinjaman")+sum("pengeluaran"));
+  $("#summary").innerHTML = `
+    <p>Jumlah anggota terdaftar: <b>${members.length}</b></p>
+    <p>Jenis barang terdaftar: <b>${items.length}</b></p>
+    <p>Total transaksi: <b>${transactions.length}</b></p>
+    <p>Selisih catatan pemasukan dan pengeluaran:
+      <b>${rupiah(sum("simpanan")+sum("angsuran")+sum("pemasukan")-sum("pinjaman")-sum("pengeluaran"))}</b>
+    </p>`;
+  $("#reportSummary").innerHTML = $("#summary").innerHTML;
+
+  $("#membersTable").innerHTML = members.length ? `<div class="tablewrap"><table>
+    <thead><tr><th>Nama</th><th>No. anggota</th><th>HP</th><th>Tanggal</th><th>Aksi</th></tr></thead>
+    <tbody>${members.map(m=>`<tr><td>${esc(m.name)}</td><td>${esc(m.number)}</td>
+    <td>${esc(m.phone||"-")}</td><td>${esc(m.date||"-")}</td>
+    <td><button class="danger" data-del-member="${m.id}">Hapus</button></td></tr>`).join("")}</tbody>
+    </table></div>` : '<div class="empty">Belum ada anggota.</div>';
+
+  $("#memberSelect").innerHTML = '<option value="">Tidak terkait anggota</option>' +
+    members.map(m=>`<option value="${m.id}">${esc(m.name)} (${esc(m.number)})</option>`).join("");
+
+  $("#moneyTable").innerHTML = transactions.length ? `<div class="tablewrap"><table>
+    <thead><tr><th>Tanggal</th><th>Jenis</th><th>Jumlah</th><th>Keterangan</th><th>Aksi</th></tr></thead>
+    <tbody>${[...transactions].sort((a,b)=>(b.date||"").localeCompare(a.date||"")).map(t=>
+    `<tr><td>${esc(t.date||"-")}</td><td>${esc(t.type)}</td><td>${rupiah(t.amount)}</td>
+    <td>${esc(t.note)}</td><td><button class="danger" data-del-tx="${t.id}">Hapus</button></td></tr>`).join("")}</tbody>
+    </table></div>` : '<div class="empty">Belum ada transaksi.</div>';
+
+  $("#stockItem").innerHTML = items.map(i =>
+    `<option value="${i.id}">${esc(i.name)} (stok ${Number(i.qty)||0})</option>`).join("");
+
+  $("#stockTable").innerHTML = items.length ? `<div class="tablewrap"><table>
+    <thead><tr><th>Barang</th><th>Kode</th><th>Stok</th><th>Harga jual</th><th>Aksi</th></tr></thead>
+    <tbody>${items.map(i=>`<tr><td>${esc(i.name)}</td><td>${esc(i.code)}</td>
+    <td>${Number(i.qty)||0}</td><td>${rupiah(i.price)}</td>
+    <td><button class="danger" data-del-item="${i.id}">Hapus</button></td></tr>`).join("")}</tbody>
+    </table></div>` : '<div class="empty">Belum ada barang.</div>';
+
+  document.querySelectorAll("[data-del-member]").forEach(btn => btn.onclick = async () => {
+    if(confirm("Hapus data anggota ini? Riwayat transaksi tidak ikut terhapus.")) {
+      await deleteDoc(doc(db,"members",btn.dataset.delMember)); await loadData();
+    }
+  });
+  document.querySelectorAll("[data-del-tx]").forEach(btn => btn.onclick = async () => {
+    if(confirm("Hapus catatan transaksi ini?")) {
+      await deleteDoc(doc(db,"transactions",btn.dataset.delTx)); await loadData();
+    }
+  });
+  document.querySelectorAll("[data-del-item]").forEach(btn => btn.onclick = async () => {
+    if(confirm("Hapus barang ini? Pastikan tidak ada catatan stok yang perlu dipertahankan.")) {
+      await deleteDoc(doc(db,"items",btn.dataset.delItem)); await loadData();
+    }
+  });
 }
-document.getElementById("year").textContent=new Date().getFullYear();
-renderKategori();
-render();
+
+$("#memberForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  const f = new FormData(e.target);
+  try {
+    await addRecord("members", {
+      name:f.get("name").trim(), number:f.get("number").trim(),
+      phone:f.get("phone").trim(), date:f.get("date")
+    });
+    e.target.reset(); alert("Anggota tersimpan.");
+  } catch(err) { alert("Gagal menyimpan anggota: "+err.message); }
+});
+
+$("#moneyForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  const f = new FormData(e.target);
+  try {
+    await addRecord("transactions", {
+      type:f.get("type"), amount:Number(f.get("amount")),
+      memberId:f.get("member"), date:f.get("date"),
+      note:f.get("note").trim()
+    });
+    e.target.reset(); e.target.elements.date.value=today();
+    alert("Transaksi tersimpan.");
+  } catch(err) { alert("Gagal menyimpan transaksi: "+err.message); }
+});
+
+$("#itemForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  const f = new FormData(e.target);
+  try {
+    await addRecord("items", {
+      name:f.get("name").trim(), code:f.get("code").trim(),
+      qty:Number(f.get("qty")), price:Number(f.get("price"))
+    });
+    e.target.reset(); alert("Barang tersimpan.");
+  } catch(err) { alert("Gagal menyimpan barang: "+err.message); }
+});
+
+$("#stockForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  const f = new FormData(e.target);
+  const itemId=f.get("item"), qty=Number(f.get("qty")), direction=f.get("direction");
+  if(!itemId || qty<1) return alert("Pilih barang dan jumlah yang valid.");
+  try {
+    const itemRef=doc(db,"items",itemId);
+    await runTransaction(db, async tx => {
+      const snap=await tx.get(itemRef);
+      if(!snap.exists()) throw new Error("Barang tidak ditemukan.");
+      const oldQty=Number(snap.data().qty)||0;
+      if(direction==="out" && qty>oldQty) throw new Error("Stok tidak mencukupi.");
+      tx.update(itemRef,{qty:oldQty+(direction==="in"?qty:-qty)});
+    });
+    await addRecord("transactions",{
+      type:direction==="in"?"stok_masuk":"stok_keluar",
+      amount:qty, itemId, date:today(),
+      note:f.get("note").trim()+" — "+(direction==="in"?"barang masuk":"barang keluar")
+    });
+    e.target.reset(); await loadData(); alert("Stok berhasil diperbarui.");
+  } catch(err) { alert("Perubahan stok gagal: "+err.message); }
+});
+
+function download(name, text, type) {
+  const blob=new Blob([text],{type});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement("a"); a.href=url; a.download=name; a.click();
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+function csv(rows) {
+  return "\uFEFF"+rows.map(row=>row.map(v=>
+    '"'+String(v??"").replace(/"/g,'""')+'"').join(",")).join("\r\n");
+}
+$("#exportBtn").onclick=()=>download("laporan-koperasi.csv",csv([
+  ["Tanggal","Jenis","Jumlah","Keterangan"],
+  ...transactions.map(t=>[t.date,t.type,t.amount,t.note])
+]),"text/csv;charset=utf-8");
+$("#backupBtn").onclick=()=>download("cadangan-koperasi.json",
+  JSON.stringify({members,items,transactions},null,2),"application/json");
+
+$("#memberForm").elements.date.value=today();
+$("#moneyForm").elements.date.value=today();
 </script>
 </body>
 </html>
